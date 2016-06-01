@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/robinjmurphy/hubot-npm.svg?branch=master)]
 
-> [Hubot](https://hubot.github.com/) script for notifications via [npm hooks](http://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm)
+> [Hubot](https://hubot.github.com/) script for npm notifications via [hooks](http://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm)
 
 ## Installation
 
