@@ -1,0 +1,187 @@
+{
+  "event": "package:publish",
+  "name": "npm-hook-test",
+  "type": "package",
+  "version": "1.0.0",
+  "hookOwner": {
+    "username": "robinmurphy"
+  },
+  "payload": {
+    "_id": "npm-hook-test",
+    "_rev": "4-d026d28de53bd4e1f7be60cf154bcd14",
+    "name": "npm-hook-test",
+    "dist-tags": {
+      "latest": "0.0.4"
+    },
+    "versions": {
+      "0.0.1": {
+        "name": "npm-hook-test",
+        "version": "0.0.1",
+        "description": "",
+        "main": "index.js",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "keywords": [],
+        "author": "",
+        "license": "ISC",
+        "_id": "npm-hook-test@0.0.1",
+        "_shasum": "c35f2d765ce9640a004ccf6538acb4c7a98b29b4",
+        "_from": ".",
+        "_npmVersion": "3.8.8",
+        "_nodeVersion": "4.4.0",
+        "_npmUser": {
+          "name": "robinmurphy",
+          "email": "robin@robinmurphy.co.uk"
+        },
+        "dist": {
+          "shasum": "c35f2d765ce9640a004ccf6538acb4c7a98b29b4",
+          "tarball": "http://registry.npmjs.org/npm-hook-test/-/npm-hook-test-0.0.1.tgz"
+        },
+        "maintainers": [
+          {
+            "name": "robinmurphy",
+            "email": "robin@robinmurphy.co.uk"
+          }
+        ],
+        "_npmOperationalInternal": {
+          "host": "packages-12-west.internal.npmjs.com",
+          "tmp": "tmp/npm-hook-test-0.0.1.tgz_1464815139494_0.8081128934863955"
+        },
+        "directories": {}
+      },
+      "0.0.2": {
+        "name": "npm-hook-test",
+        "version": "0.0.2",
+        "description": "",
+        "main": "index.js",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "keywords": [],
+        "author": "",
+        "license": "ISC",
+        "_id": "npm-hook-test@0.0.2",
+        "_shasum": "61303940eaf626e6ab3128585f3ad76844f8bb5e",
+        "_from": ".",
+        "_npmVersion": "3.8.8",
+        "_nodeVersion": "4.4.0",
+        "_npmUser": {
+          "name": "robinmurphy",
+          "email": "robin@robinmurphy.co.uk"
+        },
+        "dist": {
+          "shasum": "61303940eaf626e6ab3128585f3ad76844f8bb5e",
+          "tarball": "http://registry.npmjs.org/npm-hook-test/-/npm-hook-test-0.0.2.tgz"
+        },
+        "maintainers": [
+          {
+            "name": "robinmurphy",
+            "email": "robin@robinmurphy.co.uk"
+          }
+        ],
+        "_npmOperationalInternal": {
+          "host": "packages-12-west.internal.npmjs.com",
+          "tmp": "tmp/npm-hook-test-0.0.2.tgz_1464815336151_0.9185659969225526"
+        },
+        "directories": {}
+      },
+      "0.0.3": {
+        "name": "npm-hook-test",
+        "version": "0.0.3",
+        "description": "",
+        "main": "index.js",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "keywords": [],
+        "author": "",
+        "license": "ISC",
+        "_id": "npm-hook-test@0.0.3",
+        "_shasum": "f48df59ef39a1a14cf43359be95b9c4bd85faeb1",
+        "_from": ".",
+        "_npmVersion": "3.8.8",
+        "_nodeVersion": "4.4.0",
+        "_npmUser": {
+          "name": "robinmurphy",
+          "email": "robin@robinmurphy.co.uk"
+        },
+        "dist": {
+          "shasum": "f48df59ef39a1a14cf43359be95b9c4bd85faeb1",
+          "tarball": "http://registry.npmjs.org/npm-hook-test/-/npm-hook-test-0.0.3.tgz"
+        },
+        "maintainers": [
+          {
+            "name": "robinmurphy",
+            "email": "robin@robinmurphy.co.uk"
+          }
+        ],
+        "_npmOperationalInternal": {
+          "host": "packages-16-east.internal.npmjs.com",
+          "tmp": "tmp/npm-hook-test-0.0.3.tgz_1464815418504_0.2611184576526284"
+        },
+        "directories": {}
+      },
+      "0.0.4": {
+        "name": "npm-hook-test",
+        "version": "0.0.4",
+        "description": "",
+        "main": "index.js",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "keywords": [],
+        "author": "",
+        "license": "ISC",
+        "_id": "npm-hook-test@0.0.4",
+        "_shasum": "36cfdee89f7a623c90e7944121f9800d798b1296",
+        "_from": ".",
+        "_npmVersion": "3.8.8",
+        "_nodeVersion": "4.4.0",
+        "_npmUser": {
+          "name": "robinmurphy",
+          "email": "robin@robinmurphy.co.uk"
+        },
+        "dist": {
+          "shasum": "36cfdee89f7a623c90e7944121f9800d798b1296",
+          "tarball": "http://registry.npmjs.org/npm-hook-test/-/npm-hook-test-0.0.4.tgz"
+        },
+        "maintainers": [
+          {
+            "name": "robinmurphy",
+            "email": "robin@robinmurphy.co.uk"
+          }
+        ],
+        "_npmOperationalInternal": {
+          "host": "packages-16-east.internal.npmjs.com",
+          "tmp": "tmp/npm-hook-test-0.0.4.tgz_1464815458682_0.5057421561796218"
+        },
+        "directories": {}
+      }
+    },
+    "readme": "# npm-hook-test\n\n\n\n\n\n\n",
+    "maintainers": [
+      {
+        "name": "robinmurphy",
+        "email": "robin@robinmurphy.co.uk"
+      }
+    ],
+    "time": {
+      "modified": "2016-06-01T21:10:59.901Z",
+      "created": "2016-06-01T21:05:42.095Z",
+      "0.0.1": "2016-06-01T21:05:42.095Z",
+      "0.0.2": "2016-06-01T21:08:58.535Z",
+      "0.0.3": "2016-06-01T21:10:19.819Z",
+      "0.0.4": "2016-06-01T21:10:59.901Z"
+    },
+    "keywords": [],
+    "license": "ISC",
+    "readmeFilename": "README.md",
+    "_attachments": {}
+  },
+  "change": {
+    "dist-tag": "latest",
+    "version": "0.0.4"
+  },
+  "time": 1464815459961
+}

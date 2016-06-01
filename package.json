@@ -25,9 +25,11 @@
   },
   "homepage": "https://github.com/robinjmurphy/hubot-npm#readme",
   "devDependencies": {
+    "body-parser": "^1.15.1",
     "eslint": "^2.11.1",
     "lodash": "^4.13.1",
     "mocha": "^2.5.3",
+    "sinon": "^1.17.4",
     "supertest": "^1.2.0"
   }
 }
