@@ -45,7 +45,7 @@ describe('hubot-npm', () => {
             sinon.match({
               room: ['#test-room']
             }),
-            'npm-hook-test@1.0.0 published – https://www.npmjs.com/package/npm-hook-test'
+            'npm-hook-test@0.0.4 published – https://www.npmjs.com/package/npm-hook-test'
           );
           done();
         });

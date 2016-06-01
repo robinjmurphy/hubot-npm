@@ -8,16 +8,16 @@
 //   POST /hubot/npm?room=<room>
 'use strict';
 
-const getMessage = (data) => {
-  switch (data.event) {
+const getMessage = (hook) => {
+  switch (hook.event) {
     case 'package:publish':
-      return `${data.name}@${data.version} published – https://www.npmjs.com/package/${data.name}`;
+      return `${hook.name}@${hook.change.version} published – https://www.npmjs.com/package/${hook.name}`;
   }
 };
 
 module.exports = (robot) => {
   robot.router.post('/hubot/npm', (req, res) => {
-    const data = req.body;
+    const hook = req.body;
     let room = req.query.room;
 
     if (!room) {
@@ -28,7 +28,7 @@ module.exports = (robot) => {
       room = `#${room}`;
     }
 
-    const message = getMessage(data);
+    const message = getMessage(hook);
 
     if (message) {
       robot.send({
