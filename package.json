@@ -1,0 +1,31 @@
+{
+  "name": "hubot-npm",
+  "version": "0.0.1",
+  "description": "Hubot script for npm notifications",
+  "main": "index.js",
+  "scripts": {
+    "posttest": "eslint .",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robinjmurphy/hubot-npm.git"
+  },
+  "keywords": [
+    "hubot",
+    "hubot-scripts",
+    "npm",
+    "webhook",
+    "notifier"
+  ],
+  "author": "robin@robinmurphy.co.uk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robinjmurphy/hubot-npm/issues"
+  },
+  "homepage": "https://github.com/robinjmurphy/hubot-npm#readme",
+  "devDependencies": {
+    "eslint": "^2.11.1",
+    "mocha": "^2.5.3"
+  }
+}
