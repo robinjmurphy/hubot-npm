@@ -1,6 +1,6 @@
 {
   "name": "hubot-npm",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Hubot script for npm notifications",
   "main": "index.js",
   "scripts": {
