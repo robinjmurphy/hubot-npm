@@ -1,6 +1,6 @@
 # hubot-npm
 
-[![Build Status](https://travis-ci.org/robinjmurphy/hubot-npm.svg?branch=master)]
+![Build Status](https://travis-ci.org/robinjmurphy/hubot-npm.svg?branch=master)
 
 > [Hubot](https://hubot.github.com/) script for npm notifications via [hooks](http://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm)
 
