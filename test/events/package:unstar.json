@@ -1,0 +1,14 @@
+{
+  "event": "package:unstar",
+  "name": "npm-hook-test",
+  "type": "package",
+  "version": "1.0.0",
+  "hookOwner": {
+    "username": "robinmurphy"
+  },
+  "payload": {},
+  "change": {
+    "user": "a-user"
+  },
+  "time": 1464815459961
+}

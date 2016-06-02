@@ -14,6 +14,8 @@ const getMessage = (hook) => {
   switch (hook.event) {
     case 'package:star':
       return `${hook.change.user} starred ${hook.name} – ${url}`;
+    case 'package:unstar':
+      return `${hook.change.user} unstarred ${hook.name} – ${url}`;
     case 'package:publish':
       return `${hook.name}@${hook.change.version} published – ${url}`;
     case 'package:unpublish':
