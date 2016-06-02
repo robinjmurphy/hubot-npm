@@ -20,6 +20,8 @@ const getMessage = (hook) => {
       return `${hook.name}@${hook.change.version} published – ${url}`;
     case 'package:unpublish':
       return `${hook.name}@${hook.change.version} unpublished – ${url}`;
+    case 'package:owner':
+      return `${hook.name} owner added: ${hook.change.maintainer} – ${url}`;
   }
 };
 
