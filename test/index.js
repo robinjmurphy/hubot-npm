@@ -94,7 +94,7 @@ describe('hubot-npm', () => {
   it('returns a 400 when the room is missing', (done) => {
     request(robot.router)
       .post('/hubot/npm')
-      .send(hooks.publish)
+      .send(require('./hooks/package:publish'))
       .expect(400, done);
   });
 });
