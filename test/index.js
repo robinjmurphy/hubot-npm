@@ -10,7 +10,8 @@ const sandbox = sinon.sandbox.create();
 
 const events = {
   'package:publish': require('./events/package:publish'),
-  'package:unpublish': require('./events/package:unpublish')
+  'package:unpublish': require('./events/package:unpublish'),
+  'package:star': require('./events/package:star')
 };
 
 describe('hubot-npm', () => {
@@ -64,6 +65,24 @@ describe('hubot-npm', () => {
             room: ['#test-room']
           }),
           'npm-hook-test@0.0.4 unpublished – https://www.npmjs.com/package/npm-hook-test'
+        );
+        done();
+      });
+  });
+
+  it('supports the package:star hook', (done) => {
+    request(robot.router)
+      .post('/hubot/npm?room=test-room')
+      .send(events['package:star'])
+      .expect(200)
+      .end((err) => {
+        assert.ifError(err);
+        sinon.assert.calledWith(
+          robot.send,
+          sinon.match({
+            room: ['#test-room']
+          }),
+          'a-user starred npm-hook-test – https://www.npmjs.com/package/npm-hook-test'
         );
         done();
       });

@@ -12,6 +12,8 @@ const getMessage = (hook) => {
   const url = `https://www.npmjs.com/package/${hook.name}`;
 
   switch (hook.event) {
+    case 'package:star':
+      return `${hook.change.user} starred ${hook.name} – ${url}`;
     case 'package:publish':
       return `${hook.name}@${hook.change.version} published – ${url}`;
     case 'package:unpublish':
