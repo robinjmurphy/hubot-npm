@@ -35,6 +35,9 @@ const getMessage = (hook) => {
 
     case 'package:dist-tag-rm':
       return `${hook.name} dist-tag removed: ${hook.change['dist-tag']} – ${url}`;
+
+    case 'package:deprecated':
+      return `${hook.name}@${hook.change.deprecated} deprecated – ${url}`;
   }
 };
 

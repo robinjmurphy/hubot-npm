@@ -16,7 +16,8 @@ const hooks = {
   'package:owner': require('./hooks/package:owner'),
   'package:owner-rm': require('./hooks/package:owner-rm'),
   'package:dist-tag': require('./hooks/package:dist-tag'),
-  'package:dist-tag-rm': require('./hooks/package:dist-tag-rm')
+  'package:dist-tag-rm': require('./hooks/package:dist-tag-rm'),
+  'package:deprecated': require('./hooks/package:deprecated')
 };
 
 describe('hubot-npm', () => {
@@ -178,6 +179,24 @@ describe('hubot-npm', () => {
             room: ['#test-room']
           }),
           'npm-hook-test dist-tag removed: beta – https://www.npmjs.com/package/npm-hook-test'
+        );
+        done();
+      });
+  });
+
+  it('supports the package:deprecated hook', (done) => {
+    request(robot.router)
+      .post('/hubot/npm?room=test-room')
+      .send(hooks['package:deprecated'])
+      .expect(200)
+      .end((err) => {
+        assert.ifError(err);
+        sinon.assert.calledWith(
+          robot.send,
+          sinon.match({
+            room: ['#test-room']
+          }),
+          'npm-hook-test@0.0.4 deprecated – https://www.npmjs.com/package/npm-hook-test'
         );
         done();
       });
