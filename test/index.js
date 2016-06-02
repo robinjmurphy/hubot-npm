@@ -8,13 +8,15 @@ const bodyParser = require('body-parser');
 const assert = require('assert');
 const sandbox = sinon.sandbox.create();
 
-const events = {
+const hooks = {
   'package:publish': require('./hooks/package:publish'),
   'package:unpublish': require('./hooks/package:unpublish'),
   'package:star': require('./hooks/package:star'),
   'package:unstar': require('./hooks/package:unstar'),
   'package:owner': require('./hooks/package:owner'),
-  'package:owner-rm': require('./hooks/package:owner-rm')
+  'package:owner-rm': require('./hooks/package:owner-rm'),
+  'package:dist-tag': require('./hooks/package:dist-tag'),
+  'package:dist-tag-rm': require('./hooks/package:dist-tag-rm')
 };
 
 describe('hubot-npm', () => {
@@ -40,7 +42,7 @@ describe('hubot-npm', () => {
   it('supports the package:publish hook', (done) => {
     request(robot.router)
       .post('/hubot/npm?room=test-room')
-      .send(events['package:publish'])
+      .send(hooks['package:publish'])
       .expect(200)
       .end((err) => {
         assert.ifError(err);
@@ -58,7 +60,7 @@ describe('hubot-npm', () => {
   it('supports the package:unpublish hook', (done) => {
     request(robot.router)
       .post('/hubot/npm?room=test-room')
-      .send(events['package:unpublish'])
+      .send(hooks['package:unpublish'])
       .expect(200)
       .end((err) => {
         assert.ifError(err);
@@ -76,7 +78,7 @@ describe('hubot-npm', () => {
   it('supports the package:star hook', (done) => {
     request(robot.router)
       .post('/hubot/npm?room=test-room')
-      .send(events['package:star'])
+      .send(hooks['package:star'])
       .expect(200)
       .end((err) => {
         assert.ifError(err);
@@ -94,7 +96,7 @@ describe('hubot-npm', () => {
   it('supports the package:unstar hook', (done) => {
     request(robot.router)
       .post('/hubot/npm?room=test-room')
-      .send(events['package:unstar'])
+      .send(hooks['package:unstar'])
       .expect(200)
       .end((err) => {
         assert.ifError(err);
@@ -112,7 +114,7 @@ describe('hubot-npm', () => {
   it('supports the package:owner hook', (done) => {
     request(robot.router)
       .post('/hubot/npm?room=test-room')
-      .send(events['package:owner'])
+      .send(hooks['package:owner'])
       .expect(200)
       .end((err) => {
         assert.ifError(err);
@@ -130,7 +132,7 @@ describe('hubot-npm', () => {
   it('supports the package:owner-rm hook', (done) => {
     request(robot.router)
       .post('/hubot/npm?room=test-room')
-      .send(events['package:owner-rm'])
+      .send(hooks['package:owner-rm'])
       .expect(200)
       .end((err) => {
         assert.ifError(err);
@@ -145,10 +147,46 @@ describe('hubot-npm', () => {
       });
   });
 
+  it('supports the package:dist-tag hook', (done) => {
+    request(robot.router)
+      .post('/hubot/npm?room=test-room')
+      .send(hooks['package:dist-tag'])
+      .expect(200)
+      .end((err) => {
+        assert.ifError(err);
+        sinon.assert.calledWith(
+          robot.send,
+          sinon.match({
+            room: ['#test-room']
+          }),
+          'npm-hook-test new dist-tag: beta – https://www.npmjs.com/package/npm-hook-test'
+        );
+        done();
+      });
+  });
+
+  it('supports the package:dist-tag-rm hook', (done) => {
+    request(robot.router)
+      .post('/hubot/npm?room=test-room')
+      .send(hooks['package:dist-tag-rm'])
+      .expect(200)
+      .end((err) => {
+        assert.ifError(err);
+        sinon.assert.calledWith(
+          robot.send,
+          sinon.match({
+            room: ['#test-room']
+          }),
+          'npm-hook-test dist-tag removed: beta – https://www.npmjs.com/package/npm-hook-test'
+        );
+        done();
+      });
+  });
+
   it('returns a 400 when the room is missing', (done) => {
     request(robot.router)
       .post('/hubot/npm')
-      .send(events.publish)
+      .send(hooks.publish)
       .expect(400, done);
   });
 });

@@ -1,0 +1,14 @@
+{
+  "event": "package:dist-tag-rm",
+  "name": "npm-hook-test",
+  "type": "package",
+  "version": "1.0.0",
+  "hookOwner": {
+    "username": "robinmurphy"
+  },
+  "payload": {},
+  "change": {
+    "dist-tag": "beta"
+  },
+  "time": 1464815459961
+}

@@ -14,16 +14,27 @@ const getMessage = (hook) => {
   switch (hook.event) {
     case 'package:star':
       return `${hook.change.user} starred ${hook.name} – ${url}`;
+
     case 'package:unstar':
       return `${hook.change.user} unstarred ${hook.name} – ${url}`;
+
     case 'package:publish':
       return `${hook.name}@${hook.change.version} published – ${url}`;
+
     case 'package:unpublish':
       return `${hook.name}@${hook.change.version} unpublished – ${url}`;
+
     case 'package:owner':
       return `${hook.name} owner added: ${hook.change.maintainer} – ${url}`;
+
     case 'package:owner-rm':
       return `${hook.name} owner removed: ${hook.change.maintainer} – ${url}`;
+
+    case 'package:dist-tag':
+      return `${hook.name} new dist-tag: ${hook.change['dist-tag']} – ${url}`;
+
+    case 'package:dist-tag-rm':
+      return `${hook.name} dist-tag removed: ${hook.change['dist-tag']} – ${url}`;
   }
 };
 
