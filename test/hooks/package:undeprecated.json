@@ -1,0 +1,14 @@
+{
+  "event": "package:undeprecated",
+  "name": "npm-hook-test",
+  "type": "package",
+  "version": "1.0.0",
+  "hookOwner": {
+    "username": "robinmurphy"
+  },
+  "payload": {},
+  "change": {
+    "deprecated": "0.0.4"
+  },
+  "time": 1464815459961
+}

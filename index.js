@@ -38,6 +38,9 @@ const getMessage = (hook) => {
 
     case 'package:deprecated':
       return `${hook.name}@${hook.change.deprecated} deprecated – ${url}`;
+      
+    case 'package:undeprecated':
+      return `${hook.name}@${hook.change.deprecated} undeprecated – ${url}`;
   }
 };
 
