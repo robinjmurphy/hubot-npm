@@ -2,11 +2,14 @@
 //   Notifies about npm events via npm hooks
 // Configuration:
 //   HUBOT_NPM_SECRET - The hook secret
+//   HUBOT_NPM_ROOM - The default room for notifications
 // Commands:
 //   None
 // URLS:
 //   POST /hubot/npm?room=<room>
 'use strict';
+
+const defaultRoom = process.env.HUBOT_NPM_ROOM;
 
 const getMessage = (hook) => {
   const url = `https://www.npmjs.com/package/${hook.name}`;
@@ -47,7 +50,7 @@ const getMessage = (hook) => {
 module.exports = (robot) => {
   robot.router.post('/hubot/npm', (req, res) => {
     const hook = req.body;
-    let room = req.query.room;
+    let room = req.query.room || defaultRoom;
 
     if (!room) {
       return res.status(400).end('Missing ?room parameter');
