@@ -9,9 +9,13 @@
 'use strict';
 
 const getMessage = (hook) => {
+  const url = `https://www.npmjs.com/package/${hook.name}`;
+
   switch (hook.event) {
     case 'package:publish':
-      return `${hook.name}@${hook.change.version} published – https://www.npmjs.com/package/${hook.name}`;
+      return `${hook.name}@${hook.change.version} published – ${url}`;
+    case 'package:unpublish':
+      return `${hook.name}@${hook.change.version} unpublished – ${url}`;
   }
 };
 

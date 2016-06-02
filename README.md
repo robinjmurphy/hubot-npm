@@ -29,7 +29,7 @@ export HUBOT_NPM_SECRET=<secret>
 The npm hook URL is:
 
 ```
-<HUBOT_URL>:<PORT>/hubot/npm?room=<room>
+<hubot_url>:<port>/hubot/npm?room=<room>
 ```
 
 Be sure to set the `?room` query string parameter.
@@ -37,5 +37,5 @@ Be sure to set the `?room` query string parameter.
 You can add your hook using the [wombat CLI tool](https://www.npmjs.com/package/wombat):
 
 ```
-wombat hook add npm <HUBOT_URL>:<PORT>/hubot/npm?room=<room> <secret>
+wombat hook add <user|package|scope> <hubot_url>:<port>/hubot/npm?room=<room> <secret>
 ```

@@ -1,0 +1,15 @@
+{
+  "event": "package:unpublish",
+  "name": "npm-hook-test",
+  "type": "package",
+  "version": "1.0.0",
+  "hookOwner": {
+    "username": "robinmurphy"
+  },
+  "payload": {},
+  "change": {
+    "dist-tag": "latest",
+    "version": "0.0.4"
+  },
+  "time": 1464815459961
+}
