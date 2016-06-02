@@ -9,11 +9,12 @@ const assert = require('assert');
 const sandbox = sinon.sandbox.create();
 
 const events = {
-  'package:publish': require('./events/package:publish'),
-  'package:unpublish': require('./events/package:unpublish'),
-  'package:star': require('./events/package:star'),
-  'package:unstar': require('./events/package:unstar'),
-  'package:owner': require('./events/package:owner')
+  'package:publish': require('./hooks/package:publish'),
+  'package:unpublish': require('./hooks/package:unpublish'),
+  'package:star': require('./hooks/package:star'),
+  'package:unstar': require('./hooks/package:unstar'),
+  'package:owner': require('./hooks/package:owner'),
+  'package:owner-rm': require('./hooks/package:owner-rm')
 };
 
 describe('hubot-npm', () => {
@@ -121,6 +122,24 @@ describe('hubot-npm', () => {
             room: ['#test-room']
           }),
           'npm-hook-test owner added: a-user – https://www.npmjs.com/package/npm-hook-test'
+        );
+        done();
+      });
+  });
+
+  it('supports the package:owner-rm hook', (done) => {
+    request(robot.router)
+      .post('/hubot/npm?room=test-room')
+      .send(events['package:owner-rm'])
+      .expect(200)
+      .end((err) => {
+        assert.ifError(err);
+        sinon.assert.calledWith(
+          robot.send,
+          sinon.match({
+            room: ['#test-room']
+          }),
+          'npm-hook-test owner removed: a-user – https://www.npmjs.com/package/npm-hook-test'
         );
         done();
       });
