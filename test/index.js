@@ -55,9 +55,7 @@ const tests = [
 ];
 
 const sign = (hook) => {
-  const body = JSON.stringify(hook);
-
-  return crypto.createHmac('sha256', 'secret').update(body).digest('hex');
+  return crypto.createHmac('sha256', 'secret').update(JSON.stringify(hook)).digest('hex');
 };
 
 describe('hubot-npm', () => {
@@ -149,6 +147,7 @@ describe('hubot-npm', () => {
       .post('/hubot/npm?room=test-room')
       .set('x-npm-signature', 'sha256=not-valid')
       .send(hook)
-      .expect(400, done);
+      .expect(400)
+      .expect('invalid payload signature in x-npm-signature header', done);
   });
 });
