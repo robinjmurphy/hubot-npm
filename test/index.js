@@ -61,7 +61,10 @@ describe('hubot-npm', () => {
 
     robot = {
       router,
-      send: sandbox.stub()
+      send: sandbox.stub(),
+      logger: {
+        error: sandbox.stub()
+      }
     };
 
     script(robot);
@@ -70,7 +73,7 @@ describe('hubot-npm', () => {
   afterEach(() => {
     sandbox.restore();
   });
-  
+
   hooks.forEach((hook) => {
     it(`supports the ${hook.event} hook`, (done) => {
       request(robot.router)
@@ -96,5 +99,17 @@ describe('hubot-npm', () => {
       .post('/hubot/npm')
       .send(require('./hooks/package:publish'))
       .expect(400, done);
+  });
+
+  it('logs an error when the room is missing', (done) => {
+    request(robot.router)
+      .post('/hubot/npm')
+      .send(require('./hooks/package:publish'))
+      .expect(400)
+      .end((err) => {
+        assert.ifError(err);
+        sinon.assert.called(robot.logger.error);
+        done();
+      });
   });
 });

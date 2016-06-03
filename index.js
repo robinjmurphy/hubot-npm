@@ -41,7 +41,7 @@ const getMessage = (hook) => {
 
     case 'package:deprecated':
       return `${hook.name}@${hook.change.deprecated} deprecated – ${url}`;
-      
+
     case 'package:undeprecated':
       return `${hook.name}@${hook.change.deprecated} undeprecated – ${url}`;
   }
@@ -53,6 +53,7 @@ module.exports = (robot) => {
     let room = req.query.room || defaultRoom;
 
     if (!room) {
+      robot.logger.error('npm: ?room parameter missing from hook https://github.com/robinjmurphy/hubot-npm#usage');
       return res.status(400).end('Missing ?room parameter');
     }
 
