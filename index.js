@@ -64,7 +64,7 @@ const prefix = (room) => {
 
 module.exports = (robot) => {
   if (!secret) {
-    robot.logger.error('npm: NPM_HUBOT_SECRET is not set https://github.com/robinjmurphy/hubot-npm#installation');
+    robot.logger.error('npm: HUBOT_NPM_SECRET is not set https://github.com/robinjmurphy/hubot-npm#installation');
   }
 
   robot.router.post('/hubot/npm', (req, res) => {
