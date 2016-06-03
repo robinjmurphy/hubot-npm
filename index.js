@@ -9,7 +9,10 @@
 //   POST /hubot/npm?room=<room>
 'use strict';
 
+const crypto = require('crypto');
+
 const defaultRoom = process.env.HUBOT_NPM_ROOM;
+const secret = process.env.HUBOT_NPM_SECRET;
 
 const getMessage = (hook) => {
   const url = `https://www.npmjs.com/package/${hook.name}`;
@@ -47,18 +50,47 @@ const getMessage = (hook) => {
   }
 };
 
+const sign = (hook) => {
+  return crypto.createHmac('sha256', secret).update(JSON.stringify(hook)).digest('hex');
+};
+
+const prefix = (room) => {
+  if (room && room.indexOf('#') !== 0) {
+    return `#${room}`;
+  } else {
+    return room;
+  }
+};
+
 module.exports = (robot) => {
+  if (!secret) {
+    robot.logger.error('npm: NPM_HUBOT_SECRET is not set https://github.com/robinjmurphy/hubot-npm#installation');
+  }
+
   robot.router.post('/hubot/npm', (req, res) => {
     const hook = req.body;
-    let room = req.query.room || defaultRoom;
+    const signature = req.headers['x-npm-signature'];
+
+    if (!signature) {
+      robot.logger.error('npm: missing x-npm-signature header');
+      res.status(400).end('missing x-npm-signature header');
+      return;
+    }
+
+    const expected = sign(hook);
+
+    if (signature !== `sha256=${expected}`) {
+      robot.logger.error('npm: invalid payload signature in x-npm-signature header');
+      res.status(400).end('invalid payload signature in x-npm-signature header');
+      return;
+    }
+
+    let room = prefix(req.query.room || defaultRoom);
 
     if (!room) {
       robot.logger.error('npm: ?room parameter missing from hook https://github.com/robinjmurphy/hubot-npm#usage');
-      return res.status(400).end('Missing ?room parameter');
-    }
-
-    if (room && !/^#/.test(room)) {
-      room = `#${room}`;
+      res.status(400).end('missing ?room parameter');
+      return;
     }
 
     const message = getMessage(hook);

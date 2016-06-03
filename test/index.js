@@ -1,14 +1,17 @@
 'use strict';
 
+process.env.HUBOT_NPM_SECRET = 'secret';
+
 const script = require('..');
 const request = require('supertest');
 const express = require('express');
 const sinon = require('sinon');
 const bodyParser = require('body-parser');
 const assert = require('assert');
+const crypto = require('crypto');
 const sandbox = sinon.sandbox.create();
 
-const hooks = [
+const tests = [
   {
     event: 'package:publish',
     expected: 'npm-hook-test@0.0.4 published – https://www.npmjs.com/package/npm-hook-test'
@@ -51,6 +54,12 @@ const hooks = [
   }
 ];
 
+const sign = (hook) => {
+  const body = JSON.stringify(hook);
+
+  return crypto.createHmac('sha256', 'secret').update(body).digest('hex');
+};
+
 describe('hubot-npm', () => {
   let robot;
 
@@ -74,11 +83,14 @@ describe('hubot-npm', () => {
     sandbox.restore();
   });
 
-  hooks.forEach((hook) => {
-    it(`supports the ${hook.event} hook`, (done) => {
+  tests.forEach((test) => {
+    it(`supports the ${test.event} hook`, (done) => {
+      const hook = require(`./hooks/${test.event}`);
+
       request(robot.router)
         .post('/hubot/npm?room=test-room')
-        .send(require(`./hooks/${hook.event}`))
+        .send(hook)
+        .set('x-npm-signature', `sha256=${sign(hook)}`)
         .expect(200)
         .end((err) => {
           assert.ifError(err);
@@ -87,7 +99,7 @@ describe('hubot-npm', () => {
             sinon.match({
               room: ['#test-room']
             }),
-            hook.expected
+            test.expected
           );
           done();
         });
@@ -95,21 +107,48 @@ describe('hubot-npm', () => {
   });
 
   it('returns a 400 when the room is missing', (done) => {
+    const hook = require('./hooks/package:publish');
+
     request(robot.router)
       .post('/hubot/npm')
-      .send(require('./hooks/package:publish'))
-      .expect(400, done);
+      .set('x-npm-signature', `sha256=${sign(hook)}`)
+      .send(hook)
+      .expect(400)
+      .expect('missing ?room parameter', done);
   });
 
   it('logs an error when the room is missing', (done) => {
+    const hook = require('./hooks/package:publish');
+
     request(robot.router)
       .post('/hubot/npm')
-      .send(require('./hooks/package:publish'))
+      .set('x-npm-signature', `sha256=${sign(hook)}`)
+      .send(hook)
       .expect(400)
       .end((err) => {
         assert.ifError(err);
         sinon.assert.called(robot.logger.error);
         done();
       });
+  });
+
+  it('returns a 400 when the x-npm-signature header is missing', (done) => {
+    const hook = require('./hooks/package:publish');
+
+    request(robot.router)
+      .post('/hubot/npm?room=test-room')
+      .send(hook)
+      .expect(400)
+      .expect('missing x-npm-signature header', done);
+  });
+
+  it('returns a 400 when the secret does not match', (done) => {
+    const hook = require('./hooks/package:publish');
+
+    request(robot.router)
+      .post('/hubot/npm?room=test-room')
+      .set('x-npm-signature', 'sha256=not-valid')
+      .send(hook)
+      .expect(400, done);
   });
 });
